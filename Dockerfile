@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.9-slim-bullseye
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -12,23 +12,24 @@ RUN apt-get update && apt-get install -y \
     libxslt1-dev \
     libjpeg-dev \
     zlib1g-dev \
+    libffi-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
-WORKDIR /app
+WORKDIR /opt/odoo
 
-# Copy requirements
+# Copy requirements first
 COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install --upgrade pip wheel setuptools && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy entire project
 COPY . .
 
-# Expose port
+# Expose Odoo port
 EXPOSE 8069
 
-# Run Odoo
-CMD ["python", "odoo-bin", "-c", "/etc/odoo.conf"]
+# Start command - adjust based on your Odoo structure
+CMD ["python3", "odoo-bin"]
