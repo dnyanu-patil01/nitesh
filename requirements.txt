@@ -6,7 +6,6 @@ docutils==0.17
 ebaysdk==2.1.5
 freezegun==1.1.0
 geoip2==2.9.0
-gevent==24.2.1
 idna==2.10
 Jinja2==2.11.3
 libsass==0.20.1
